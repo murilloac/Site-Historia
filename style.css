@@ -935,8 +935,11 @@ footer {
   padding: 1.5rem;
   border-radius: 10px;
   box-shadow: var(--shadow);
-  position: sticky;
-  top: 2rem;
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  width: 300px;
+  z-index: 50;
 }
 
 .voce-sabia h3 {
@@ -977,6 +980,9 @@ footer {
   
   .voce-sabia {
     position: static;
+    width: auto;
+    right: auto;
+    top: auto;
   }
   
   nav {

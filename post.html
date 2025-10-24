@@ -35,7 +35,8 @@
     </article>
 
     <aside class="voce-sabia" id="post-sidebar">
-      <!-- Sidebar dinâmica -->
+      <h3>💡 Você sabia?</h3>
+      <p>Carregando informações...</p>
     </aside>
   </div>
 
@@ -86,6 +87,47 @@
       }
     }
     
+    function initializeQuiz() {
+      const quizButtons = document.querySelectorAll('.quiz-btn');
+      const quizFeedback = document.getElementById('quiz-feedback');
+      
+      quizButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          quizButtons.forEach(b => {
+            b.style.background = '';
+            b.style.color = '';
+          });
+          
+          if (btn.dataset.correct === 'true') {
+            btn.style.background = '#27ae60';
+            btn.style.color = 'white';
+            quizFeedback.textContent = "✅ Correto! Parabéns!";
+            quizFeedback.style.color = "#27ae60";
+          } else {
+            btn.style.background = '#e74c3c';
+            btn.style.color = 'white';
+            quizFeedback.textContent = "❌ Errado, tente novamente!";
+            quizFeedback.style.color = "#e74c3c";
+          }
+          
+          quizButtons.forEach(b => {
+            b.disabled = true;
+            b.style.opacity = '0.7';
+          });
+          
+          setTimeout(() => {
+            quizButtons.forEach(b => {
+              b.disabled = false;
+              b.style.opacity = '1';
+              b.style.background = '';
+              b.style.color = '';
+            });
+            quizFeedback.textContent = '';
+          }, 3000);
+        });
+      });
+    }
+    
     function loadPost(post) {
       // Atualizar meta tags
       document.getElementById('page-title').textContent = `${post.titulo} — E o resto é Historia`;
@@ -95,8 +137,36 @@
       // Carregar conteúdo
       document.getElementById('post-content').innerHTML = post.conteudo;
       
-      // Incrementar views
-      analytics.incrementViews(post.id);
+      // Carregar sidebar
+      if (post.sidebar) {
+        document.getElementById('post-sidebar').innerHTML = post.sidebar;
+      }
+      
+      // Carregar quiz
+      if (post.quiz) {
+        const quizSection = document.getElementById('post-quiz');
+        quizSection.innerHTML = `
+          <h3>🧠 Quiz rápido: ${post.titulo}</h3>
+          <p>${post.quiz.pergunta}</p>
+          <div class="quiz-options">
+            ${post.quiz.opcoes.map(opcao => 
+              `<button class="quiz-btn" data-correct="${opcao.correto}">${opcao.texto}</button>`
+            ).join('')}
+          </div>
+          <p id="quiz-feedback"></p>
+        `;
+        quizSection.style.display = 'block';
+        
+        // Aguardar DOM atualizar antes de inicializar
+        setTimeout(() => initializeQuiz(), 50);
+      }
+      
+      // Incrementar views e atualizar display
+      const views = analytics.incrementViews(post.id);
+      const viewCountElement = document.getElementById('view-count');
+      if (viewCountElement) {
+        viewCountElement.textContent = analytics.formatViews(views);
+      }
       
       // Inicializar funcionalidades
       setTimeout(() => {
@@ -105,6 +175,9 @@
           const countSpan = btn.querySelector('.like-count');
           countSpan.textContent = localStorage.getItem(`like-${post.id}`) || '0';
         });
+        
+        // Inicializar quiz
+        initializeQuiz();
       }, 100);
     }
   </script>

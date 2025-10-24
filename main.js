@@ -342,8 +342,10 @@ function closeLightbox() {
 
 // ==== INICIALIZAÇÃO AUTOMÁTICA ====
 document.addEventListener('DOMContentLoaded', () => {
-  // Incrementar visualizações automaticamente
-  incrementViewCount();
+  // Incrementar visualizações apenas se não for página de post dinâmico
+  if (!window.location.search.includes('id=')) {
+    incrementViewCount();
+  }
   
   // Atualizar tempo de leitura automaticamente
   updateReadingTime();
