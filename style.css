@@ -201,7 +201,7 @@ header button#toggle-dark-mode:hover {
 
 /* ====== CONTAINER ====== */
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 2rem auto;
   padding: 0 1rem;
 }
@@ -908,16 +908,17 @@ footer {
 /* ====== POST LAYOUT ====== */
 .post-layout {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 1fr;
   gap: 3rem;
   align-items: start;
 }
 
 .post {
   background: var(--card-bg);
-  padding: 2rem;
+  padding: 3rem;
   border-radius: 15px;
   box-shadow: var(--shadow);
+  max-width: none;
 }
 
 .post-title {
