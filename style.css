@@ -272,6 +272,12 @@ header button#toggle-dark-mode:hover {
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   margin-bottom: 3rem;
+  max-width: 100%;
+}
+
+.grid-posts .card {
+  max-width: 400px;
+  justify-self: center;
 }
 
 .card {
