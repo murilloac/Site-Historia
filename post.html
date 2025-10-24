@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Carregando... — E o resto é Historia</title>
+  <meta name="description" content="" id="page-description">
+  <meta name="keywords" content="" id="page-keywords">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header>
+    <h1>E o resto é Historia</h1>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+      <a href="categorias.html">Categorias</a>
+    </nav>
+    <button id="toggle-dark-mode" aria-label="Alternar modo escuro">🌙</button>
+  </header>
+
+  <nav class="breadcrumb">
+    <a href="index.html">Início</a> > <span id="breadcrumb-title">Carregando...</span>
+  </nav>
+
+  <div class="container post-layout">
+    <article class="post">
+      <div class="post-content" id="post-content">
+        <div class="loading">Carregando artigo...</div>
+      </div>
+    </article>
+
+    <aside class="voce-sabia" id="post-sidebar">
+      <!-- Sidebar dinâmica -->
+    </aside>
+  </div>
+
+  <section class="quiz" id="post-quiz" style="display:none;">
+    <!-- Quiz dinâmico -->
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>E o resto é Historia</h3>
+        <p>Blog dedicado ao ensino de História, cultura e sociedade.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Links Úteis</h3>
+        <ul>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="categorias.html">Categorias</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Blog do Professor de História — Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <span class="close">&times;</span>
+    <img src="" alt="Imagem ampliada" class="lightbox-content">
+  </div>
+
+  <button id="scroll-top" class="scroll-top" aria-label="Voltar ao topo">↑</button>
+
+  <script src="posts.js"></script>
+  <script src="main.js"></script>
+  <script>
+    // Carregar post dinamicamente
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get('id');
+    
+    if (postId) {
+      const post = posts.find(p => p.id === postId);
+      if (post) {
+        loadPost(post);
+      } else {
+        document.getElementById('post-content').innerHTML = '<h1>Post não encontrado</h1>';
+      }
+    }
+    
+    function loadPost(post) {
+      // Atualizar meta tags
+      document.getElementById('page-title').textContent = `${post.titulo} — E o resto é Historia`;
+      document.getElementById('page-description').content = post.descricao;
+      document.getElementById('breadcrumb-title').textContent = post.titulo;
+      
+      // Carregar conteúdo
+      document.getElementById('post-content').innerHTML = post.conteudo;
+      
+      // Incrementar views
+      analytics.incrementViews(post.id);
+      
+      // Inicializar funcionalidades
+      setTimeout(() => {
+        const likeButtons = document.querySelectorAll('.like-btn');
+        likeButtons.forEach(btn => {
+          const countSpan = btn.querySelector('.like-count');
+          countSpan.textContent = localStorage.getItem(`like-${post.id}`) || '0';
+        });
+      }, 100);
+    }
+  </script>
+</body>
+</html>

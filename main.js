@@ -39,7 +39,7 @@ if (grid && typeof posts !== 'undefined') {
           ${post.tags.map(tag => `<span>${tag.replace(/-/g,' ')}</span>`).join('')}
         </div>
         <p>${post.descricao}</p>
-        <a href="${post.url}" class="btn">Ler mais</a>
+        <a href="post.html?id=${post.id}" class="btn">Ler mais</a>
         <button class="like-btn" data-id="${post.id}">
           ❤️ <span class="like-count">0</span>
         </button>

@@ -6,9 +6,63 @@ const posts = [
     descricao: "Tomando o Novo Testamento como base, percebemos que todo o cristianismo — que se estende até os dias atuais — é fundamentado na fé e em relatos documentais resgatados por historiadores.",
     imagem: "https://i.imgur.com/1Gt3ccE.jpeg",
     tags: ["historia-religiosa"],
-    url: "novoTestamento.html",
+    url: "post.html?id=novo-testamento",
     data: "2025-01-23",
-    autor: "Professor de História"
+    autor: "Murillo Cunha",
+    conteudo: `
+      <h1 class="post-title">Novo Testamento como História</h1>
+      
+      <div class="post-meta">
+        <span>📅 23 de janeiro de 2025</span>
+        <span>⏱️ 5 min de leitura</span>
+        <span>👁️ <span id="view-count">0</span> visualizações</span>
+        <span>👤 Murillo Cunha</span>
+      </div>
+
+      <div class="share-buttons">
+        <button onclick="shareWhatsApp()" class="share-btn whatsapp">📱 WhatsApp</button>
+        <button onclick="shareTwitter()" class="share-btn twitter">🐦 Twitter</button>
+        <button onclick="copyLink()" class="share-btn copy">🔗 Copiar Link</button>
+      </div>
+      
+      <p>Quando pensamos em História, logo nos vêm à mente as guerras mais recentes, revoluções, colonização e alguns personagens bastante usados em filmes e séries. Porém, a amplitude dessa disciplina pode ser observada nos mais variados campos. Um exemplo disso é o campo da fé: a Bíblia, sendo um dos livros mais antigos, faz parte dessa História. Tomando o Novo Testamento como base, percebemos que todo o cristianismo — que se estende até os dias atuais — é fundamentado na fé e em relatos documentais resgatados por historiadores.</p>
+      
+      <section class="gallery">
+        <h3>Galeria de imagens</h3>
+        <div class="gallery-grid">
+          <img src="https://i.imgur.com/Sskc6gH.jpeg" alt="Papiros antigos do Novo Testamento" class="gallery-item" loading="lazy">
+          <img src="https://i.imgur.com/tFwK95u.jpeg" alt="Estudos bíblicos e manuscritos" class="gallery-item" loading="lazy">
+          <img src="https://i.imgur.com/DJmUELj.jpeg" alt="Igreja histórica" class="gallery-item" loading="lazy">
+        </div>
+      </section>
+      
+      <p>Mas qual é a veracidade desses documentos? Como dito no próprio livro de Lucas (C1, v1-4), os textos foram escritos e divulgados a partir de experiências e relatos. Levando em conta que a maioria deles foi criada e transmitida por adoradores e seguidores de Jesus Cristo, surge a dúvida: podemos confiar?</p>
+      
+      <p>A resposta para essa pergunta, segundo a História, seria sim. Historicamente falando, para avaliar a autenticidade de uma evidência bibliográfica, analisamos a data em que o documento original foi escrito e comparamos com a cópia mais antiga existente, ou seja a cópia mais próxima do período que acreditamos ter acontecido o relato. Isso porque, naquela época, o material utilizado para a escrita se deteriorava rapidamente, tornando necessária a replicação constante dos textos.</p>
+      
+      <p>Um exemplo bastante usado para ilustrar essa análise é o do filósofo Platão. Sua existência é inquestionável, porém a evidência bibliográfica mais antiga referente a ele data de cerca de 1.200 anos após o período em que se acredita que escreveu o original. Já no caso do Novo Testamento, a evidência mais antiga descoberta — os papiros de John Rylands — foi datada de aproximadamente 100 anos após o original.</p>
+      
+      <p>Outra forma de comprovar a autenticidade é observar a quantidade de cópias existentes do texto original. No caso de Platão, todas as suas obras conhecidas derivam de apenas sete cópias encontradas. Já o Novo Testamento possui mais de 5.600 cópias em grego e mais de 19 mil em aramaico e outras línguas. Em outras palavras, estamos falando de uma base bibliográfica de mais de 24 mil cópias. Assim, a consistência histórica do Novo Testamento, com base em tudo o que foi apresentado, chega a impressionantes 99,5% de consistência.</p>
+      
+      <p>Levando tudo isso em conta — e deixando a fé de lado — podemos concluir que o Novo Testamento é, sem dúvida, o documento histórico mais consistente em termos textuais. Unindo ciência e fé, é possível afirmar a existência e a história de Jesus Cristo.</p>
+
+      <div class="post-actions">
+        <button class="like-btn" data-id="novo-testamento">
+          ❤️ <span class="like-count">0</span>
+        </button>
+        <button class="bookmark-btn" onclick="toggleBookmark()">
+          🔖 Salvar
+        </button>
+      </div>
+
+      <div class="post-tags">
+        <span class="tag">História Religiosa</span>
+        <span class="tag">Cristianismo</span>
+        <span class="tag">Documentos Históricos</span>
+      </div>
+
+      <a href="index.html" class="btn back-btn">← Voltar para o início</a>
+    `
   },
 ];
 
@@ -42,7 +96,7 @@ const analytics = {
   
   // Obter visualizações de um artigo
   getViews(postId) {
-    return parseInt(localStorage.getItem(`views-${postId}`)) || Math.floor(Math.random() * 200) + 50;
+    return parseInt(localStorage.getItem(`views-${postId}`)) || 0;
   },
   
   // Calcular tempo de leitura
