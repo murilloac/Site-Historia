@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Categorias — E o resto é Historia</title>
+  <meta name="description" content="Explore nossos artigos organizados por categorias: História Religiosa, História Antiga, História do Brasil e muito mais">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>E o resto é Historia</h1>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+      <a href="categorias.html">Categorias</a>
+    </nav>
+    <button id="toggle-dark-mode" aria-label="Alternar modo escuro">🌙</button>
+  </header>
+
+  <nav class="breadcrumb">
+    <a href="index.html">Início</a> > <span>Categorias</span>
+  </nav>
+
+  <main class="container">
+    <div class="categories-page">
+      <section class="categories-hero">
+        <h1>📚 Categorias</h1>
+        <p>Explore nossos artigos organizados por temas. Encontre exatamente o que você está procurando!</p>
+      </section>
+
+      <div class="categories-grid">
+        <div class="category-card">
+          <div class="category-icon">⛪</div>
+          <h2>História Religiosa</h2>
+          <p>Explore o desenvolvimento das religiões e seu impacto na formação das sociedades ao longo da história.</p>
+          <div class="category-stats">
+            <span>📄 5 artigos</span>
+            <span>👁️ 1.2k visualizações</span>
+          </div>
+          <a href="#" class="btn category-btn" data-category="historia-religiosa">Ver Artigos</a>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">🏛️</div>
+          <h2>História Antiga</h2>
+          <p>Civilizações antigas, suas conquistas, cultura e legado que ainda influencia o mundo moderno.</p>
+          <div class="category-stats">
+            <span>📄 8 artigos</span>
+            <span>👁️ 2.1k visualizações</span>
+          </div>
+          <a href="#" class="btn category-btn" data-category="historia-antiga">Ver Artigos</a>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">🇧🇷</div>
+          <h2>História do Brasil</h2>
+          <p>A formação, evolução e transformações da sociedade brasileira desde a colonização até os dias atuais.</p>
+          <div class="category-stats">
+            <span>📄 12 artigos</span>
+            <span>👁️ 3.5k visualizações</span>
+          </div>
+          <a href="#" class="btn category-btn" data-category="historia-do-brasil">Ver Artigos</a>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">🏰</div>
+          <h2>Idade Média</h2>
+          <p>Desmistificando os "tempos sombrios": cultura, sociedade e inovações do período medieval.</p>
+          <div class="category-stats">
+            <span>📄 6 artigos</span>
+            <span>👁️ 1.8k visualizações</span>
+          </div>
+          <a href="#" class="btn category-btn" data-category="idade-media">Ver Artigos</a>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">🌍</div>
+          <h2>História Mundial</h2>
+          <p>Eventos e processos históricos que moldaram diferentes regiões do mundo e suas interconexões.</p>
+          <div class="category-stats">
+            <span>📄 10 artigos</span>
+            <span>👁️ 2.7k visualizações</span>
+          </div>
+          <a href="#" class="btn category-btn" data-category="historia-mundial">Ver Artigos</a>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">🎓</div>
+          <h2>Ensino de História</h2>
+          <p>Metodologias, recursos e reflexões sobre o ensino de História na educação básica e superior.</p>
+          <div class="category-stats">
+            <span>📄 4 artigos</span>
+            <span>👁️ 950 visualizações</span>
+          </div>
+          <a href="#" class="btn category-btn" data-category="ensino-historia">Ver Artigos</a>
+        </div>
+      </div>
+
+      <section class="category-posts" id="category-posts" style="display: none;">
+        <div class="category-header">
+          <h2 id="category-title">Artigos da Categoria</h2>
+          <button class="btn-secondary" onclick="showAllCategories()">← Voltar às Categorias</button>
+        </div>
+        <div class="grid-posts" id="category-articles"></div>
+      </section>
+
+      <section class="popular-tags">
+        <h2>🏷️ Tags Populares</h2>
+        <div class="tags-cloud">
+          <span class="tag-cloud">Cristianismo</span>
+          <span class="tag-cloud">Império Romano</span>
+          <span class="tag-cloud">Brasil Colônia</span>
+          <span class="tag-cloud">Feudalismo</span>
+          <span class="tag-cloud">Renascimento</span>
+          <span class="tag-cloud">Revolução Industrial</span>
+          <span class="tag-cloud">Guerra Mundial</span>
+          <span class="tag-cloud">Civilizações</span>
+          <span class="tag-cloud">Cultura</span>
+          <span class="tag-cloud">Sociedade</span>
+        </div>
+      </section>
+
+      <section class="archive-section">
+        <h2>📅 Arquivo por Data</h2>
+        <div class="archive-grid">
+          <div class="archive-item">
+            <h3>2025</h3>
+            <ul>
+              <li><a href="#">Janeiro (3 artigos)</a></li>
+              <li><a href="#">Dezembro 2024 (5 artigos)</a></li>
+              <li><a href="#">Novembro 2024 (4 artigos)</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>E o resto é Historia</h3>
+        <p>Blog dedicado ao ensino de História, cultura e sociedade.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Links Úteis</h3>
+        <ul>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="categorias.html">Categorias</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Blog do Professor de História — Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <button id="scroll-top" class="scroll-top" aria-label="Voltar ao topo">↑</button>
+
+  <script src="posts.js"></script>
+  <script>
+    // Categories functionality
+    function showAllCategories() {
+      const categoriesGrid = document.querySelector('.categories-grid');
+      const categoryPostsSection = document.getElementById('category-posts');
+      
+      if (categoriesGrid) categoriesGrid.style.display = 'grid';
+      if (categoryPostsSection) categoryPostsSection.style.display = 'none';
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('.category-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Em breve! Esta categoria estará disponível em uma próxima atualização.');
+      });
+    });
+
+    document.querySelectorAll('.tag-cloud').forEach(tag => {
+      tag.addEventListener('click', function() {
+        alert(`Buscando artigos sobre: ${this.textContent}`);
+      });
+    });
+  </script>
+  <script src="main.js"></script>
+</body>
+</html>
