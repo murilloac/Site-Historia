@@ -1,0 +1,8 @@
+navegue ate a pasta do projeto cd 
+git remote add origin https://github.com/murilloac/e-o-resto-e-historia
+git branch -M main
+git push -u origin main
+
+git add .
+git commit -m ""
+git push
