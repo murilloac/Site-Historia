@@ -128,8 +128,11 @@
 
   <button id="scroll-top" class="scroll-top" aria-label="Voltar ao topo">↑</button>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    // Contact form functionality
+    // Initialize EmailJS
+    emailjs.init('YOUR_PUBLIC_KEY'); // Substitua pela sua chave pública
+    
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
@@ -140,12 +143,19 @@
         submitBtn.innerHTML = '📤 Enviando...';
         submitBtn.disabled = true;
         
-        setTimeout(() => {
-          alert('Mensagem enviada com sucesso! Responderemos em breve.');
-          contactForm.reset();
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        }, 2000);
+        // Enviar via EmailJS
+        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+          .then(() => {
+            alert('Mensagem enviada com sucesso! Responderemos em breve.');
+            contactForm.reset();
+          })
+          .catch(() => {
+            alert('Erro ao enviar mensagem. Tente novamente.');
+          })
+          .finally(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+          });
       });
     }
   </script>
