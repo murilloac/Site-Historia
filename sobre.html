@@ -64,49 +64,34 @@
           Sou um professor de História apaixonado pelo ensino e pela pesquisa. Com anos de experiência em sala de aula, descobri que a melhor forma de ensinar História é conectá-la com o presente, mostrando como os eventos do passado continuam a influenciar nossas vidas hoje.
         </p>
         
-        <div class="author-stats">
+        <!--<div class="author-stats">
           <div class="stat">
             <h3>10+</h3>
             <p>Anos de Ensino</p>
           </div>
           <div class="stat">
-            <h3>500+</h3>
-            <p>Alunos Impactados</p>
-          </div>
-          <div class="stat">
-            <h3>50+</h3>
+            <h3 id="total-articles">0</h3>
             <p>Artigos Publicados</p>
           </div>
-        </div>
+          <div class="stat">
+            <h3 id="total-views">0</h3>
+            <p>Visualizações</p>
+          </div>
+        </div>-->
       </section>
 
-      <section class="about-topics">
+      <!--<section class="about-topics">
         <h2>Temas Abordados</h2>
-        <div class="topics-grid">
-          <div class="topic-card">
-            <h3>⛪ História Religiosa</h3>
-            <p>Exploramos o desenvolvimento das religiões e seu impacto na sociedade.</p>
-          </div>
-          <div class="topic-card">
-            <h3>🏛️ História Antiga</h3>
-            <p>Civilizações antigas e suas contribuições para o mundo moderno.</p>
-          </div>
-          <div class="topic-card">
-            <h3>🇧🇷 História do Brasil</h3>
-            <p>A formação e evolução da sociedade brasileira.</p>
-          </div>
-          <div class="topic-card">
-            <h3>🏰 Idade Média</h3>
-            <p>Desmistificando os "tempos sombrios" da história europeia.</p>
-          </div>
-        </div>
-      </section>
+        <div class="topics-grid" id="topics-grid">-->
+          <!-- Tópicos serão gerados dinamicamente -->
+        <!--</div>
+      </section>-->
 
-      <section class="about-contact">
+      <!--<section class="about-contact">
         <h2>Vamos Conversar?</h2>
         <p>Tem alguma sugestão de tema? Quer colaborar? Entre em contato!</p>
         <a href="contato.html" class="btn">📧 Entre em Contato</a>
-      </section>
+      </section>-->
     </div>
   </main>
 
@@ -132,6 +117,38 @@
 
   <button id="scroll-top" class="scroll-top" aria-label="Voltar ao topo">↑</button>
 
+  <script src="posts.js"></script>
+  <script>
+    // ==== GERAR ESTATÍSTICAS AUTOMÁTICAS ====
+    document.addEventListener('DOMContentLoaded', function() {
+      // Atualizar total de artigos
+      const totalArticles = posts.length;
+      document.getElementById('total-articles').textContent = totalArticles;
+      
+      // Calcular total de visualizações
+      let totalViews = 0;
+      posts.forEach(post => {
+        totalViews += analytics.getViews(post.id);
+      });
+      document.getElementById('total-views').textContent = analytics.formatViews(totalViews);
+      
+      // Gerar tópicos dinamicamente
+      const topicsGrid = document.getElementById('topics-grid');
+      Object.keys(categories).forEach(categoryKey => {
+        const category = categories[categoryKey];
+        const articleCount = analytics.getArticlesByCategory(categoryKey);
+        
+        const topicCard = document.createElement('div');
+        topicCard.className = 'topic-card';
+        topicCard.innerHTML = `
+          <h3>${category.icon} ${category.name}</h3>
+          <p>${category.description}</p>
+          <small>${articleCount} artigos publicados</small>
+        `;
+        topicsGrid.appendChild(topicCard);
+      });
+    });
+  </script>
   <script src="main.js"></script>
 </body>
 </html>

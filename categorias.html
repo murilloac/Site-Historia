@@ -31,72 +31,8 @@
         <p>Explore nossos artigos organizados por temas. Encontre exatamente o que você está procurando!</p>
       </section>
 
-      <div class="categories-grid">
-        <div class="category-card">
-          <div class="category-icon">⛪</div>
-          <h2>História Religiosa</h2>
-          <p>Explore o desenvolvimento das religiões e seu impacto na formação das sociedades ao longo da história.</p>
-          <div class="category-stats">
-            <span>📄 5 artigos</span>
-            <span>👁️ 1.2k visualizações</span>
-          </div>
-          <a href="#" class="btn category-btn" data-category="historia-religiosa">Ver Artigos</a>
-        </div>
-
-        <div class="category-card">
-          <div class="category-icon">🏛️</div>
-          <h2>História Antiga</h2>
-          <p>Civilizações antigas, suas conquistas, cultura e legado que ainda influencia o mundo moderno.</p>
-          <div class="category-stats">
-            <span>📄 8 artigos</span>
-            <span>👁️ 2.1k visualizações</span>
-          </div>
-          <a href="#" class="btn category-btn" data-category="historia-antiga">Ver Artigos</a>
-        </div>
-
-        <div class="category-card">
-          <div class="category-icon">🇧🇷</div>
-          <h2>História do Brasil</h2>
-          <p>A formação, evolução e transformações da sociedade brasileira desde a colonização até os dias atuais.</p>
-          <div class="category-stats">
-            <span>📄 12 artigos</span>
-            <span>👁️ 3.5k visualizações</span>
-          </div>
-          <a href="#" class="btn category-btn" data-category="historia-do-brasil">Ver Artigos</a>
-        </div>
-
-        <div class="category-card">
-          <div class="category-icon">🏰</div>
-          <h2>Idade Média</h2>
-          <p>Desmistificando os "tempos sombrios": cultura, sociedade e inovações do período medieval.</p>
-          <div class="category-stats">
-            <span>📄 6 artigos</span>
-            <span>👁️ 1.8k visualizações</span>
-          </div>
-          <a href="#" class="btn category-btn" data-category="idade-media">Ver Artigos</a>
-        </div>
-
-        <div class="category-card">
-          <div class="category-icon">🌍</div>
-          <h2>História Mundial</h2>
-          <p>Eventos e processos históricos que moldaram diferentes regiões do mundo e suas interconexões.</p>
-          <div class="category-stats">
-            <span>📄 10 artigos</span>
-            <span>👁️ 2.7k visualizações</span>
-          </div>
-          <a href="#" class="btn category-btn" data-category="historia-mundial">Ver Artigos</a>
-        </div>
-
-        <div class="category-card">
-          <div class="category-icon">🎓</div>
-          <h2>Ensino de História</h2>
-          <p>Metodologias, recursos e reflexões sobre o ensino de História na educação básica e superior.</p>
-          <div class="category-stats">
-            <span>📄 4 artigos</span>
-            <span>👁️ 950 visualizações</span>
-          </div>
-          <a href="#" class="btn category-btn" data-category="ensino-historia">Ver Artigos</a>
-        </div>
+      <div class="categories-grid" id="categories-grid">
+        <!-- Categorias serão geradas dinamicamente -->
       </div>
 
       <section class="category-posts" id="category-posts" style="display: none;">
@@ -129,9 +65,9 @@
           <div class="archive-item">
             <h3>2025</h3>
             <ul>
-              <li><a href="#">Janeiro (3 artigos)</a></li>
-              <li><a href="#">Dezembro 2024 (5 artigos)</a></li>
-              <li><a href="#">Novembro 2024 (4 artigos)</a></li>
+              <li><a href="#">Janeiro (<span id="jan-count">0</span> artigos)</a></li>
+              <li><a href="#">Dezembro 2024 (<span id="dec-count">0</span> artigos)</a></li>
+              <li><a href="#">Novembro 2024 (<span id="nov-count">0</span> artigos)</a></li>
             </ul>
           </div>
         </div>
@@ -163,24 +99,149 @@
 
   <script src="posts.js"></script>
   <script>
-    // Categories functionality
+    // ==== GERAR CATEGORIAS DINAMICAMENTE ====
+    document.addEventListener('DOMContentLoaded', function() {
+      const categoriesGrid = document.getElementById('categories-grid');
+      
+      Object.keys(categories).forEach(categoryKey => {
+        const category = categories[categoryKey];
+        const articleCount = analytics.getArticlesByCategory(categoryKey);
+        const viewCount = analytics.getViewsByCategory(categoryKey);
+        
+        const card = document.createElement('div');
+        card.className = 'category-card';
+        card.innerHTML = `
+          <div class="category-icon">${category.icon}</div>
+          <h2>${category.name}</h2>
+          <p>${category.description}</p>
+          <div class="category-stats">
+            <span>📄 ${articleCount} artigos</span>
+            <span>👁️ ${analytics.formatViews(viewCount)} visualizações</span>
+          </div>
+          <a href="#" class="btn category-btn" data-category="${categoryKey}">Ver Artigos</a>
+        `;
+        categoriesGrid.appendChild(card);
+      });
+      
+      // Atualizar contadores de arquivo
+      if (document.getElementById('jan-count')) {
+        const janCount = posts.filter(p => new Date(p.data).getMonth() === 0).length;
+        const decCount = posts.filter(p => new Date(p.data).getMonth() === 11).length;
+        const novCount = posts.filter(p => new Date(p.data).getMonth() === 10).length;
+        
+        document.getElementById('jan-count').textContent = janCount;
+        document.getElementById('dec-count').textContent = decCount;
+        document.getElementById('nov-count').textContent = novCount;
+      }
+    });
+
+    // ==== SHOW CATEGORY POSTS ====
+    function showCategoryPosts(categoryKey) {
+      const categoriesGrid = document.getElementById('categories-grid');
+      const categoryPostsSection = document.getElementById('category-posts');
+      const categoryTitle = document.getElementById('category-title');
+      const categoryArticles = document.getElementById('category-articles');
+      
+      // Esconder grid de categorias
+      categoriesGrid.style.display = 'none';
+      
+      // Mostrar seção de posts
+      categoryPostsSection.style.display = 'block';
+      
+      // Atualizar título
+      categoryTitle.textContent = `Artigos de ${categories[categoryKey].name}`;
+      
+      // Filtrar posts da categoria
+      const filteredPosts = posts.filter(post => post.tags.includes(categoryKey));
+      
+      // Limpar container
+      categoryArticles.innerHTML = '';
+      
+      if (filteredPosts.length === 0) {
+        categoryArticles.innerHTML = `
+          <div class="no-posts" style="text-align: center; padding: 3rem; background: var(--card-bg); border-radius: 15px; margin: 2rem 0;">
+            <h3>📝 Em breve!</h3>
+            <p>Ainda não temos artigos nesta categoria, mas estamos trabalhando nisso!</p>
+            <button class="btn" onclick="showAllCategories()">← Voltar às Categorias</button>
+          </div>
+        `;
+      } else {
+        filteredPosts.forEach(post => {
+          const card = document.createElement('article');
+          card.className = 'card';
+          card.innerHTML = `
+            <img src="${post.imagem}" alt="${post.titulo}" loading="lazy">
+            <div class="card-content">
+              <h3>${post.titulo}</h3>
+              <div class="tags">
+                ${post.tags.map(tag => `<span>${tag.replace(/-/g,' ')}</span>`).join('')}
+              </div>
+              <p>${post.descricao}</p>
+              <a href="${post.url}" class="btn">Ler mais</a>
+              <button class="like-btn" data-id="${post.id}">
+                ❤️ <span class="like-count">0</span>
+              </button>
+            </div>
+          `;
+          categoryArticles.appendChild(card);
+        });
+        
+        // Inicializar likes para os novos posts
+        initializeLikeButtons();
+      }
+      
+      // Scroll para o topo da seção
+      categoryPostsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ==== SHOW ALL CATEGORIES ====
     function showAllCategories() {
-      const categoriesGrid = document.querySelector('.categories-grid');
+      const categoriesGrid = document.getElementById('categories-grid');
       const categoryPostsSection = document.getElementById('category-posts');
       
-      if (categoriesGrid) categoriesGrid.style.display = 'grid';
-      if (categoryPostsSection) categoryPostsSection.style.display = 'none';
+      categoriesGrid.style.display = 'grid';
+      categoryPostsSection.style.display = 'none';
       
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    document.querySelectorAll('.category-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('Em breve! Esta categoria estará disponível em uma próxima atualização.');
+    // ==== INICIALIZAR LIKES ====
+    function initializeLikeButtons() {
+      const likeButtons = document.querySelectorAll('.like-btn');
+      likeButtons.forEach(btn => {
+        const postId = btn.dataset.id;
+        const countSpan = btn.querySelector('.like-count');
+        
+        if (!localStorage.getItem(`like-${postId}`)) {
+          localStorage.setItem(`like-${postId}`, '0');
+        }
+        countSpan.textContent = localStorage.getItem(`like-${postId}`);
+        
+        btn.addEventListener('click', () => {
+          let current = parseInt(localStorage.getItem(`like-${postId}`));
+          current++;
+          localStorage.setItem(`like-${postId}`, current);
+          countSpan.textContent = current;
+          btn.classList.add('liked');
+          
+          btn.style.transform = 'scale(1.2)';
+          setTimeout(() => {
+            btn.style.transform = 'scale(1)';
+          }, 200);
+        });
       });
+    }
+
+    // ==== CATEGORY BUTTONS ====
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('category-btn')) {
+        e.preventDefault();
+        const categoryKey = e.target.dataset.category;
+        showCategoryPosts(categoryKey);
+      }
     });
 
+    // ==== TAG CLOUD ====
     document.querySelectorAll('.tag-cloud').forEach(tag => {
       tag.addEventListener('click', function() {
         alert(`Buscando artigos sobre: ${this.textContent}`);

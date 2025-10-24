@@ -179,20 +179,31 @@ function toggleBookmark() {
   }
 }
 
-// ==== VIEW COUNTER ====
+// ==== VIEW COUNTER AUTOMÁTICO ====
 function incrementViewCount() {
   const viewCountElement = document.getElementById('view-count');
-  if (viewCountElement) {
-    let currentViews = parseInt(viewCountElement.textContent) || 0;
-    currentViews++;
-    viewCountElement.textContent = currentViews;
-    localStorage.setItem('article-views', currentViews);
+  if (viewCountElement && typeof analytics !== 'undefined') {
+    // Pegar ID do post da URL ou elemento
+    const postId = getPostIdFromPage();
+    if (postId) {
+      const views = analytics.incrementViews(postId);
+      viewCountElement.textContent = analytics.formatViews(views);
+    }
   }
 }
 
-// Incrementar visualizações ao carregar a página
-if (document.getElementById('view-count')) {
-  incrementViewCount();
+function getPostIdFromPage() {
+  // Extrair ID do post baseado na URL ou elemento da página
+  const likeBtn = document.querySelector('.like-btn');
+  if (likeBtn) {
+    return likeBtn.dataset.id;
+  }
+  
+  // Alternativa: baseado na URL
+  const path = window.location.pathname;
+  if (path.includes('novoTestamento')) return 'novo-testamento';
+  
+  return null;
 }
 
 // ==== READING PROGRESS ====
@@ -204,6 +215,18 @@ if (progress) {
     const scrollPercent = (scrollTop / docHeight) * 100;
     progress.style.width = Math.min(scrollPercent, 100) + '%';
   });
+}
+
+// ==== TEMPO DE LEITURA AUTOMÁTICO ====
+function updateReadingTime() {
+  const readingTimeElement = document.querySelector('.post-meta span:nth-child(2)');
+  const postContent = document.querySelector('.post-content');
+  
+  if (readingTimeElement && postContent && typeof analytics !== 'undefined') {
+    const text = postContent.textContent || postContent.innerText;
+    const readingTime = analytics.calculateReadingTime(text);
+    readingTimeElement.innerHTML = `⏱️ ${readingTime} min de leitura`;
+  }
 }
 
 // ==== SHARE FUNCTIONS ====
@@ -316,3 +339,12 @@ function closeLightbox() {
     document.body.style.overflow = 'auto';
   }
 }
+
+// ==== INICIALIZAÇÃO AUTOMÁTICA ====
+document.addEventListener('DOMContentLoaded', () => {
+  // Incrementar visualizações automaticamente
+  incrementViewCount();
+  
+  // Atualizar tempo de leitura automaticamente
+  updateReadingTime();
+});
