@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Novo testamento — E o resto é Historia</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* ==== Estilo do Lightbox ==== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      animation: zoomIn 0.3s ease;
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Barra de progresso de leitura -->
+  <div id="reading-progress"></div>
+
+  <header>
+    <h1>E o resto é Historia</h1>
+    <nav>
+      <a href="./index.html">Início</a>
+      <a href="#">Sobre</a>
+      <a href="#">Contato</a>
+    </nav>
+    <button id="toggle-dark-mode">🌙</button>
+  </header>
+
+  <!-- CONTAINER GERAL COM SIDEBAR -->
+  <div class="container post-layout">
+    <article class="post">
+      <div class="post-content">
+        <h2 class="post-title">Novo Testamento como História</h2>
+        <p><strong>Publicado em:</strong> 23 de outubro de 2025</p>
+        <br>
+        <!-- resumo breve antes do texto completo --> 
+        <p>
+          Quando pensamos em História, logo nos vêm à mente as guerras mais recentes, revoluções, colonização e alguns personagens bastante usados em filmes e séries. Porém, a amplitude dessa disciplina pode ser observada nos mais variados campos. Um exemplo disso é o campo da fé: a Bíblia, sendo um dos livros mais antigos, faz parte dessa História. Tomando o Novo Testamento como base, percebemos que todo o cristianismo — que se estende até os dias atuais — é fundamentado na fé e em relatos documentais resgatados por historiadores.
+        </p>
+        <br>
+        <!-- Galeria de imagens -->
+        <section class="gallery">
+          <h3>Galeria de imagens</h3>
+          <div class="gallery-grid">
+            <img src="https://i.imgur.com/Sskc6gH.jpeg" alt="Papiros" class="gallery-item">
+            <img src="https://i.imgur.com/tFwK95u.jpeg" alt="Estudos" class="gallery-item">
+            <img src="https://i.imgur.com/DJmUELj.jpeg" alt="Igreja" class="gallery-item">
+          </div>
+        </section>
+        <br>
+        <p>
+          Mas qual é a veracidade desses documentos? Como dito no próprio livro de Lucas (C1, v1-4), os textos foram escritos e divulgados a partir de experiências e relatos. Levando em conta que a maioria deles foi criada e transmitida por adoradores e seguidores de Jesus Cristo, surge a dúvida: podemos confiar?
+        </p>
+        <br>
+        <p>
+          A resposta para essa pergunta, segundo a História, seria sim. Historicamente falando, para avaliar a autenticidade de uma evidência bibliográfica, analisamos a data em que o documento original foi escrito e comparamos com a cópia mais antiga existente, ou seja a cópia mais próxima do período que acreditamos ter acontecido o relato. Isso porque, naquela época, o material utilizado para a escrita se deteriorava rapidamente, tornando necessária a replicação constante dos textos.
+        </p>
+        <br>
+        <p>
+          Um exemplo bastante usado para ilustrar essa análise é o do filósofo Platão. Sua existência é inquestionável, porém a evidência bibliográfica mais antiga referente a ele data de cerca de 1.200 anos após o período em que se acredita que escreveu o original. Já no caso do Novo Testamento, a evidência mais antiga descoberta — os papiros de John Rylands — foi datada de aproximadamente 100 anos após o original.
+        </p>
+        <br>
+        <p>
+          Outra forma de comprovar a autenticidade é observar a quantidade de cópias existentes do texto original. No caso de Platão, todas as suas obras conhecidas derivam de apenas sete cópias encontradas. Já o Novo Testamento possui mais de 5.600 cópias em grego e mais de 19 mil em aramaico e outras línguas. Em outras palavras, estamos falando de uma base bibliográfica de mais de 24 mil cópias. Assim, a consistência histórica do Novo Testamento, com base em tudo o que foi apresentado, chega a impressionantes 99,5% de consistência.
+        </p>
+        <br>
+        <p>
+          Levando tudo isso em conta — e deixando a fé de lado — podemos concluir que o Novo Testamento é, sem dúvida, o documento histórico mais consistente em termos textuais. Unindo ciência e fé, é possível afirmar a existência e a história de Jesus Cristo.
+        </p>
+
+        <!-- ❤️ Like compartilhado -- alterar o data-id-->
+        <button class="like-btn" data-id="novo-testamento">
+          ❤️ <span class="like-count">0</span>
+        </button>
+
+        <a href="index.html" class="read-more">← Voltar para o início</a>
+      </div>
+    </article>
+
+    <!-- 📚 Seção “Você sabia?” -->
+    <aside class="voce-sabia">
+      <h3>Você sabia?</h3>
+      <p>
+        Os textos originais do Novo Testamento foram escritos em grego koiné e o primeiro livro escrito cronologicamente não foi o <strong>evangelho de Mateus</strong> mas sim a <strong>Epístola de Tiago</strong> por volta de 45-48 d.C o Novo Testamento é organizado por tipo de texto evangelhos, cartas, etc 
+      </p>
+    </aside>
+  </div>
+
+  <!-- Quiz -->
+  <section class="quiz">
+    <h3>Quiz rápido: Novo Testamento</h3>
+    <p>Quantos livros possui no Novo Testamento na maioria das tradições cristãs?</p>
+    <button class="quiz-btn" data-correct="false">26</button>
+    <button class="quiz-btn" data-correct="true">27</button>
+    <button class="quiz-btn" data-correct="false">28</button>
+    <p id="quiz-feedback"></p>
+  </section>
+
+  <!-- Posts relacionados -->
+  <section class="related-posts">
+    <h3>Você também pode gostar de:</h3>
+    <div class="grid-posts">
+      <!-- cards gerados dinamicamente -->
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Blog do Professor de História — Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- Lightbox container -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Imagem ampliada">
+  </div>
+
+  <script src="../posts.js"></script>
+  <script>
+    // ==== Quiz ====
+    const quizButtons = document.querySelectorAll('.quiz-btn');
+    const quizFeedback = document.getElementById('quiz-feedback');
+    quizButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.correct === 'true') {
+          quizFeedback.textContent = "✅ Correto!";
+          quizFeedback.style.color = "green";
+        } else {
+          quizFeedback.textContent = "❌ Errado, tente novamente!";
+          quizFeedback.style.color = "red";
+        }
+      });
+    });
+
+    // ==== Barra de progresso ====
+    const progress = document.getElementById('reading-progress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      progress.style.width = scrollPercent + '%';
+    });
+
+    // ==== Modo Dark ====
+    const toggleDarkMode = document.getElementById("toggle-dark-mode");
+    const body = document.body;
+
+    if (localStorage.getItem("darkMode") === "enabled") {
+      body.classList.add("dark-mode");
+    }
+
+    toggleDarkMode.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+      if (body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkMode", "enabled");
+        toggleDarkMode.textContent = "☀️";
+      } else {
+        localStorage.setItem("darkMode", "disabled");
+        toggleDarkMode.textContent = "🌙";
+      }
+    });
+
+    toggleDarkMode.textContent = body.classList.contains("dark-mode") ? "☀️" : "🌙";
+
+    // ==== Sistema de Like compartilhado ====
+    const likeBtn = document.querySelector('.like-btn');
+    const postId = likeBtn.dataset.id;
+    const countSpan = likeBtn.querySelector('.like-count');
+
+    if (!localStorage.getItem(`like-${postId}`)) {
+      localStorage.setItem(`like-${postId}`, '0');
+    }
+
+    countSpan.textContent = localStorage.getItem(`like-${postId}`);
+
+    likeBtn.addEventListener('click', () => {
+      let current = parseInt(localStorage.getItem(`like-${postId}`));
+      current++;
+      localStorage.setItem(`like-${postId}`, current);
+      countSpan.textContent = current;
+      likeBtn.classList.add('liked');
+    });
+
+    // ==== POSTS RELACIONADOS ====
+    if (typeof posts !== 'undefined') {
+      const relatedContainer = document.querySelector('.related-posts .grid-posts');
+      const currentPostId = postId;
+      const related = posts.filter(p => p.id !== currentPostId).slice(0, 3);
+      related.forEach(post => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${post.imagem}" alt="${post.titulo}">
+          <div class="card-content">
+            <h4>${post.titulo}</h4>
+            <p>${post.descricao}</p>
+            <a href="${post.url}" class="btn">Ler mais</a>
+          </div>
+        `;
+        relatedContainer.appendChild(card);
+      });
+    }
+
+    // ==== Lightbox para galeria ====
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    document.querySelectorAll('.gallery-item').forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.classList.add('active');
+        lightboxImg.src = img.src;
+      });
+    });
+
+    // Fecha ao clicar fora da imagem ou apertar Esc
+    lightbox.addEventListener('click', (e) => {
+      if (e.target !== lightboxImg) lightbox.classList.remove('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') lightbox.classList.remove('active');
+    });
+  </script>
+</body>
+</html>

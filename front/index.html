@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E o resto é Historia</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>E o resto é Historia</h1>
+    <nav>
+      <a href="./index.html">Início</a>
+      <a href="./sobre.html">Sobre</a>
+      <a href="./contato.html">Contato</a>
+    </nav>
+    <button id="toggle-dark-mode">🌙</button>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-slider">
+      <div class="slide" style="background-image: url('https://i.imgur.com/1nzDTNY.jpeg');"></div>
+      <div class="slide" style="background-image: url('https://i.imgur.com/lOLt7Jb.jpeg');"></div>
+      <div class="slide" style="background-image: url('https://i.imgur.com/rQLwLYG.jpeg');"></div>
+    </div>
+    <div class="hero-text">
+      <h2>Explore o passado para entender o presente</h2>
+      <p>Artigos semanais sobre História, cultura e sociedade — produzidos por um professor apaixonado pelo ensino.</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <h2 class="section-title">Últimos artigos</h2>
+
+    <!-- CAMPO DE BUSCA -->
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Pesquisar por tema, palavra ou período..." />
+    </div>
+
+    <!-- FILTRO DE TAGS -->
+    <div class="tag-filter">
+      <button class="tag-btn active" data-tag="todos">Todos</button>
+      <button class="tag-btn" data-tag="historia-religiosa">História Religiosa</button>
+    </div>
+
+    <!-- POSTS DINÂMICOS -->
+    <div class="grid-posts"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 Blog do Professor de História — Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="../posts.js"></script>
+
+  <script>
+    // ==== SLIDE HERO ====
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slider .slide');
+    function showNextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    slides[currentSlide].classList.add('active');
+    setInterval(showNextSlide, 5000);
+
+    // ==== GERAR POSTS DINÂMICOS ====
+    const grid = document.querySelector('.grid-posts');
+
+    posts.forEach(post => {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.dataset.tags = post.tags.join(',');
+      card.innerHTML = `
+        <img src="${post.imagem}" alt="${post.titulo}">
+        <div class="card-content">
+          <h3><a href="${post.url}" class="post-link">${post.titulo}</a></h3>
+          <div class="tags">
+            ${post.tags.map(tag => `<span>${tag.replace(/-/g,' ')}</span>`).join('')}
+          </div>
+          <p>${post.descricao}</p>
+          <a href="${post.url}" class="btn">Ler mais</a>
+
+          <!-- ❤️ Botão de Like -->
+          <button class="like-btn" data-id="${post.id}">
+            ❤️ <span class="like-count">0</span>
+          </button>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    // ==== FILTRO E BUSCA ====
+    const tagButtons = document.querySelectorAll('.tag-btn');
+    const searchInput = document.getElementById('searchInput');
+    let activeTag = "todos";
+
+    function filterPosts() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const description = card.querySelector('p').textContent.toLowerCase();
+        const matchesTag = activeTag === "todos" || card.dataset.tags.includes(activeTag);
+        const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+        card.style.display = (matchesTag && matchesSearch) ? "" : "none";
+      });
+    }
+
+    tagButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tagButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeTag = btn.dataset.tag;
+        filterPosts();
+      });
+    });
+
+    searchInput.addEventListener('input', filterPosts);
+
+    // ==== MODO DARK ====
+    const toggleDarkMode = document.getElementById("toggle-dark-mode");
+    const body = document.body;
+
+    if (localStorage.getItem("darkMode") === "enabled") {
+      body.classList.add("dark-mode");
+    }
+
+    toggleDarkMode.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+      if (body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkMode", "enabled");
+        toggleDarkMode.textContent = "☀️";
+      } else {
+        localStorage.setItem("darkMode", "disabled");
+        toggleDarkMode.textContent = "🌙";
+      }
+    });
+
+    toggleDarkMode.textContent = body.classList.contains("dark-mode") ? "☀️" : "🌙";
+
+    // ==== SISTEMA DE LIKES ====
+    setTimeout(() => {
+      const likeButtons = document.querySelectorAll('.like-btn');
+
+      likeButtons.forEach(btn => {
+        const postId = btn.dataset.id;
+        const countSpan = btn.querySelector('.like-count');
+
+        if (!localStorage.getItem(`like-${postId}`)) {
+          localStorage.setItem(`like-${postId}`, '0');
+        }
+        countSpan.textContent = localStorage.getItem(`like-${postId}`);
+
+        btn.addEventListener('click', () => {
+          let current = parseInt(localStorage.getItem(`like-${postId}`));
+          current++;
+          localStorage.setItem(`like-${postId}`, current);
+          countSpan.textContent = current;
+          btn.classList.add('liked');
+        });
+      });
+    }, 200);
+  </script>
+</body>
+</html>
