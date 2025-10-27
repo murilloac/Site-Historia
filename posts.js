@@ -27,7 +27,7 @@ const posts = [
       <h1 class="post-title">Novo Testamento como História</h1>
       
       <div class="post-meta">
-        <span>📅 23 de janeiro de 2025</span>
+        <span>📅 23 de Outubro de 2025</span>
         <span>⏱️ 5 min de leitura</span>
         <span>👁️ <span id="view-count">0</span> visualizações</span>
         <span>👤 Murillo Cunha</span>
@@ -90,22 +90,22 @@ const posts = [
     sidebar: `
       <h3>💡 Você sabia?</h3>
       <p>
-        Os textos originais do Novo Testamento foram escritos em <strong>grego koiné</strong> e o primeiro livro escrito cronologicamente não foi o evangelho de Mateus, mas sim a <strong>Epístola de Tiago</strong> por volta de 45-48 d.C. O Novo Testamento é organizado por tipo de texto: evangelhos, cartas, etc.
+        As 30 moedas de prata que Judas recebeu ao trair Jesus pode ser associada a uma parábola descrita no livro do antigo testamento do profeta Zacarias, nela ele descreve um pastor que cuidava de um rebanho porém ao cobrar o valor do seu serviço foi pago com a quantia de 30 moedas de prata, quantia insignificante representando o valor do pastor, traçando um paralelo Jesus seria o pastor e Israel o rebanho.
       </p>
     `,
     quiz: {
-      pergunta: "Quantos livros possui o Novo Testamento na maioria das tradições cristãs?",
+      pergunta: "Com quantos anos jesus iniciou seu ministério",
       opcoes: [
-        { texto: "26", correto: false },
-        { texto: "27", correto: true },
-        { texto: "28", correto: false }
+        { texto: "30", correto: true },
+        { texto: "31", correto: false },
+        { texto: "33", correto: false }
       ]
     },
     conteudo: `
       <h1 class="post-title">Jesus existiu ou não?</h1>
       
       <div class="post-meta">
-        <span>📅 23 de janeiro de 2025</span>
+        <span>📅 27 de Outubro de 2025</span>
         <span>⏱️ 5 min de leitura</span>
         <span>👁️ <span id="view-count">0</span> visualizações</span>
         <span>👤 Murillo Cunha</span>
