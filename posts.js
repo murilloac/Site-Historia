@@ -84,7 +84,7 @@ const posts = [
     descricao: "Nesse texto apresento algumas evidências historicas que tratam da existencia do Cristo - Evidências mostrando relatos da vida e da obras de Jesus",
     imagem: "https://i.imgur.com/1Gt3ccE.jpeg",
     tags: ["historia-religiosa"],
-    url: "post.html?id=novo-testamento",
+    url: "post.html?id=Jesus-existiu",
     data: "2025-01-23",
     autor: "Murillo Cunha",
     sidebar: `
@@ -149,7 +149,7 @@ const posts = [
 	  <p>Para a maioria dos historiadores, é muito plausível a existência de Jesus de Nazaré, embora sempre tratada como hipótese. Para se chegar à certeza absoluta, é necessário considerar o fator fé. Quanto ao personagem, acredito que as evidências apresentadas, somadas a muitas outras não citadas aqui, são fortes. Contudo, depende do que cada pessoa acredita ou quer acreditar. Um ponto que merece destaque sem sombra de dúvidas é o impacto da existência de Cristo na humanidade — e outro ponto bastante curioso que pode ser trazido a discussão é que ao tratarmos de outros nomes históricos, como Sócrates, que é citado por apenas três autores e sem qualquer evidência arqueológica, não se gera a mesma discussão sobre sua existência como ocorre com Jesus.</p>
 
       <div class="post-actions">
-        <button class="like-btn" data-id="novo-testamento">
+        <button class="like-btn" data-id="Jesus-existiu">
           ❤️ <span class="like-count">0</span>
         </button>
         <button class="bookmark-btn" onclick="toggleBookmark()">
